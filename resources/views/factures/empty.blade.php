@@ -2,51 +2,81 @@
 @section('css')
 @endsection
 @section('page-header')
-				<!-- breadcrumb -->
-				<div class="breadcrumb-header justify-content-between">
-					<div class="my-auto">
-						<div class="d-flex">
-							<h4 class="content-title mb-0 my-auto">Pages</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Empty</span>
-						</div>
-					</div>
-					<div class="d-flex my-xl-auto right-content">
-						<div class="pr-1 mb-3 mb-xl-0">
-							<button type="button" class="btn btn-info btn-icon ml-2"><i class="mdi mdi-filter-variant"></i></button>
-						</div>
-						<div class="pr-1 mb-3 mb-xl-0">
-							<button type="button" class="btn btn-danger btn-icon ml-2"><i class="mdi mdi-star"></i></button>
-						</div>
-						<div class="pr-1 mb-3 mb-xl-0">
-							<button type="button" class="btn btn-warning  btn-icon ml-2"><i class="mdi mdi-refresh"></i></button>
-						</div>
-						<div class="mb-3 mb-xl-0">
-							<div class="btn-group dropdown">
-								<button type="button" class="btn btn-primary">14 Aug 2019</button>
-								<button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" id="dropdownMenuDate" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<span class="sr-only">Toggle Dropdown</span>
-								</button>
-								<div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuDate" data-x-placement="bottom-end">
-									<a class="dropdown-item" href="#">2015</a>
-									<a class="dropdown-item" href="#">2016</a>
-									<a class="dropdown-item" href="#">2017</a>
-									<a class="dropdown-item" href="#">2018</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- breadcrumb -->
+    <!-- breadcrumb -->
+    <div class="breadcrumb-header justify-content-between">
+        <div class="my-auto">
+            <div class="d-flex">
+                <h4 class="content-title mb-0 my-auto">Pages</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Empty</span>
+            </div>
+        </div>
+        <div class="d-flex my-xl-auto right-content">
+            <div class="pr-1 mb-3 mb-xl-0">
+                <button type="button" class="btn btn-info btn-icon ml-2"><i class="mdi mdi-filter-variant"></i></button>
+            </div>
+            <div class="pr-1 mb-3 mb-xl-0">
+                <button type="button" class="btn btn-danger btn-icon ml-2"><i class="mdi mdi-star"></i></button>
+            </div>
+            <div class="pr-1 mb-3 mb-xl-0">
+                <button type="button" class="btn btn-warning  btn-icon ml-2"><i class="mdi mdi-refresh"></i></button>
+            </div>
+            <div class="mb-3 mb-xl-0">
+                <div class="btn-group dropdown">
+                    <button type="button" class="btn btn-primary">14 Aug 2019</button>
+                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+                        id="dropdownMenuDate" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuDate"
+                        data-x-placement="bottom-end">
+                        <a class="dropdown-item" href="#">2015</a>
+                        <a class="dropdown-item" href="#">2016</a>
+                        <a class="dropdown-item" href="#">2017</a>
+                        <a class="dropdown-item" href="#">2018</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- breadcrumb -->
 @endsection
 @section('content')
-				<!-- row -->
-				<div class="row">
+    <!-- row -->
+    <div class="row">
+        
+        <div class="col-sm-6 col-md-4 col-xl-3 mg-t-20">
+            <a class="modal-effect btn btn-outline-primary btn-block" data-effect="effect-sign" data-toggle="modal"
+                href="#modaldemo8">Hi</a>
+        </div>
 
-				</div>
-				<!-- row closed -->
-			</div>
-			<!-- Container closed -->
-		</div>
-		<!-- main-content closed -->
+        <!-- Modal effects -->
+        <div class="modal" id="modaldemo8">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content modal-content-demo">
+                    <div class="modal-header">
+                        <h6 class="modal-title">Modal Header</h6><button aria-label="Close" class="close"
+                            data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <h6>Modal Body</h6>
+                        <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur
+                            magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn ripple btn-primary" type="button">Save changes</button>
+                        <button class="btn ripple btn-secondary" data-dismiss="modal" type="button">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Modal effects-->
+    </div>
+    <!-- row closed -->
+    </div>
+    <!-- Container closed -->
+    </div>
+    <!-- main-content closed -->
 @endsection
 @section('js')
+<!-- Internal Modal js-->
+<script src="{{URL::asset('assets/js/modal.js')}}"></script>
 @endsection

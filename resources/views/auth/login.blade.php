@@ -1,4 +1,5 @@
 @extends('layouts.master2')
+
 @section('title')
     Connexion - Logiciel de facturation
 @stop
