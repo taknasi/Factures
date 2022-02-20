@@ -6,5 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Section extends Model
 {
-    protected $fillable=['section_nom','description'];
+    protected $fillable=['section_nom','description','user_id'];
+
+    public function user(){
+       return $this->belongsTo(User::class,'user_id');
+    }
 }

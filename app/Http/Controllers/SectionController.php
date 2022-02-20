@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SectionRequest;
 use App\Models\Section;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SectionController extends Controller
 {
@@ -14,17 +16,10 @@ class SectionController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $sections = Section::with(['user' => function ($q) {
+            $q->select('name', 'id');
+        }])->orderBy('id', 'Desc')->get();
+        return view('sections.sections', compact('sections'));
     }
 
     /**
@@ -33,20 +28,15 @@ class SectionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SectionRequest $request)
     {
-        //
-    }
+        $section = Section::create([
+            'section_nom' => $request->section_nom,
+            'description' => $request->description,
+            'user_id' => Auth::user()->id
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Section  $section
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Section $section)
-    {
-        //
+        return redirect()->route('sections.index')->with(['success' => 'Ajou avec seccess']);
     }
 
     /**
@@ -67,9 +57,19 @@ class SectionController extends Controller
      * @param  \App\Models\Section  $section
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Section $section)
+    public function update(SectionRequest $request)
     {
-        //
+      
+        $section = Section::find($request->id);
+        if ($section) {
+            $section->update([
+                'section_nom' => $request->section_nom,
+                'description' => $request->description,
+                'user_id' => Auth::user()->id
+            ]);
+            return redirect()->route('sections.index')->with(['success' => 'Modif avec seccess']);
+        } else
+            return redirect()->route('sections.index')->with(['error' => 'erreur dans modif']);
     }
 
     /**
@@ -78,8 +78,9 @@ class SectionController extends Controller
      * @param  \App\Models\Section  $section
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Section $section)
+    public function destroy(Request $request)
     {
-        //
+        $section = Section::find($request->id)->delete();
+        return redirect()->route('sections.index')->with(['success' => 'delete avec seccess']);
     }
 }

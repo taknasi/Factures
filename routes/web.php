@@ -21,7 +21,14 @@ Route::group(['middleware'=>'auth'],function(){
         return view('index');
     })->name('index');
 
+    /*************************************** Sections **************************************/
+    Route::resource('sections','SectionController');
+    /*************************************** End Sections **********************************/
+
     Route::get('/{page}', 'AdminController@index');
+    Route::get('/test', function(){
+        return view('factures.empty');
+    });
 });
 
 
