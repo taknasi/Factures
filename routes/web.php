@@ -13,20 +13,21 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Auth::routes(['register'=>false]);
 
-Route::group(['middleware'=>'auth'],function(){
+Auth::routes(['register' => false]);
+
+Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/', function () {
         return view('index');
     })->name('index');
 
     /*************************************** Sections **************************************/
-    Route::resource('sections','SectionController');
+    Route::resource('sections', 'SectionController', ['except' => ['edit', 'show', 'create']]);
     /*************************************** End Sections **********************************/
 
     Route::get('/{page}', 'AdminController@index');
-    Route::get('/test', function(){
+    Route::get('/test', function () {
         return view('factures.empty');
     });
 });

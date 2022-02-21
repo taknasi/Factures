@@ -79,10 +79,9 @@
 
 
                                                 <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
-                                                    data-id="{{ $section->id }}" 
-                                                    data-section_nom="{{ $section->section_nom }}"
-                                                    data-toggle="modal" href="#modaldemo9"
-                                                    title="حذف"><i class="las la-trash"></i></a>
+                                                    data-id="{{ $section->id }}"
+                                                    data-section_nom="{{ $section->section_nom }}" data-toggle="modal"
+                                                    href="#modaldemo9" title="حذف"><i class="las la-trash"></i></a>
 
                                             </td>
                                         </tr>
@@ -215,6 +214,7 @@
     <!-- main-content closed -->
 @endsection
 @section('js')
+    <!-- mli ikoun error f validation walakin edit w7alna fiha tanchofo chi 7al -->
     @if (Session::has('errors'))
         <script>
             $(document).ready(function() {
@@ -224,6 +224,8 @@
             });
         </script>
     @endif
+
+    <!-- hna fin kan3amro l values ta3 edit -->
 
     <script>
         $('#exampleModal2').on('show.bs.modal', function(event) {
@@ -238,17 +240,18 @@
         })
     </script>
 
-<script>
-    $('#modaldemo9').on('show.bs.modal', function(event) {
-        var button = $(event.relatedTarget)
-        var id = button.data('id')
-        var section_name = button.data('section_nom')
-        var modal = $(this)
-        modal.find('.modal-body #id').val(id);
-        modal.find('.modal-body #section_nom').val(section_name);
-    })
-
-</script>
+    <!-- hna fin kan3amro l values ta3 delete -->
+    
+    <script>
+        $('#modaldemo9').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget)
+            var id = button.data('id')
+            var section_name = button.data('section_nom')
+            var modal = $(this)
+            modal.find('.modal-body #id').val(id);
+            modal.find('.modal-body #section_nom').val(section_name);
+        })
+    </script>
     <!-- Internal Data tables -->
     <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js') }}"></script>
