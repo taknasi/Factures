@@ -1,5 +1,13 @@
 @extends('layouts.master')
 @section('css')
+<!-- Internal Select2 css -->
+<link href="{{URL::asset('assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
+<!--Internal  Datetimepicker-slider css -->
+<link href="{{URL::asset('assets/plugins/amazeui-datetimepicker/css/amazeui.datetimepicker.css')}}" rel="stylesheet">
+<link href="{{URL::asset('assets/plugins/jquery-simple-datetimepicker/jquery.simple-dtpicker.css')}}" rel="stylesheet">
+<link href="{{URL::asset('assets/plugins/pickerjs/picker.min.css')}}" rel="stylesheet">
+<!-- Internal Spectrum-colorpicker css -->
+<link href="{{URL::asset('assets/plugins/spectrum-colorpicker/spectrum.css')}}" rel="stylesheet">
 @endsection
 @section('page-header')
     <!-- breadcrumb -->
@@ -48,6 +56,29 @@
                 href="#modaldemo8">Hi</a>
         </div>
 
+        <div class="col-lg-4 mg-t-20 mg-lg-t-0">
+            <p class="mg-b-10">Single Select with Search</p>
+            <select class="form-control select2">
+                <option label="Choose one">
+                </option>
+                <option value="Firefox">
+                    Firefox
+                </option>
+                <option value="Chrome">
+                    Chrome
+                </option>
+                <option value="Safari">
+                    Safari
+                </option>
+                <option value="Opera">
+                    Opera
+                </option>
+                <option value="Internet Explorer">
+                    Internet Explorer
+                </option>
+            </select>
+        </div><!-- col-4 -->
+
         <!-- Modal effects -->
         <div class="modal" id="modaldemo8">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -78,5 +109,18 @@
 @endsection
 @section('js')
 <!-- Internal Modal js-->
-<script src="{{URL::asset('assets/js/modal.js')}}"></script>
+<!--Internal  Datepicker js -->
+<script src="{{URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js')}}"></script>
+<!--Internal  jquery.maskedinput js -->
+<script src="{{URL::asset('assets/plugins/jquery.maskedinput/jquery.maskedinput.js')}}"></script>
+<!--Internal  spectrum-colorpicker js -->
+<script src="{{URL::asset('assets/plugins/spectrum-colorpicker/spectrum.js')}}"></script>
+<!-- Internal Select2.min js -->
+<script src="{{URL::asset('assets/plugins/select2/js/select2.min.js')}}"></script>
+<!--Internal Ion.rangeSlider.min js -->
+<script src="{{URL::asset('assets/plugins/amazeui-datetimepicker/js/amazeui.datetimepicker.min.js')}}"></script>
+<!-- Ionicons js -->
+<script src="{{URL::asset('assets/plugins/jquery-simple-datetimepicker/jquery.simple-dtpicker.js')}}"></script>
+
+<script src="{{URL::asset('assets/js/form-elements.js')}}"></script>
 @endsection

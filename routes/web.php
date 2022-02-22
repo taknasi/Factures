@@ -25,11 +25,14 @@ Route::group(['middleware' => 'auth'], function () {
     /*************************************** Sections **************************************/
     Route::resource('sections', 'SectionController', ['except' => ['edit', 'show', 'create']]);
     /*************************************** End Sections **********************************/
-
-    Route::get('/{page}', 'AdminController@index');
+    /*************************************** Sections **************************************/
+    Route::resource('produits', 'ProduitController', ['except' => ['edit', 'show', 'create']]);
+    /*************************************** End Sections **********************************/
     Route::get('/test', function () {
         return view('factures.empty');
     });
+    Route::get('/{page}', 'AdminController@index');
+    
 });
 
 

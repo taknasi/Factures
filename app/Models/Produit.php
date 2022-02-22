@@ -6,5 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Produit extends Model
 {
-    //
+    protected $guarded = [];
+
+    public function section()
+    {
+        return $this->belongsTo(Section::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class,'user_id');
+    }
 }
