@@ -30,6 +30,7 @@ Route::group(['middleware' => 'auth'], function () {
     /*************************************** End Sections **********************************/
     /*************************************** Sections **************************************/
     Route::resource('factures', 'FactureController');
+    Route::get('section/{id}','FactureController@getProduct')->name('section.getProducts'); // fill select product from section
     /*************************************** End Sections **********************************/
     Route::get('/test', function () {
         return view('factures.empty');

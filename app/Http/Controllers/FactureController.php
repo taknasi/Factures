@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Facture;
+use App\Models\Produit;
+use App\Models\Section;
 use Illuminate\Http\Request;
 
 class FactureController extends Controller
@@ -24,7 +26,17 @@ class FactureController extends Controller
      */
     public function create()
     {
-        return view('factures.create');
+        $sections=Section::OrderBy('id','Desc')->select('id','section_nom')->get();
+        return view('factures.create',compact('sections'));
+    }
+
+    public function getProduct($id){
+        $section=Section::find($id);
+        $produits="";
+        if($section){
+            $produits=Produit::where('section_id',$id)->pluck('produit_nom','id');
+        }
+        return json_encode($produits) ;
     }
 
     /**
