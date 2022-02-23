@@ -566,7 +566,8 @@
 										</select>
 									</div><!-- col-4 -->
 									<div class="col-lg-4 mg-t-20 mg-lg-t-0">
-										<p class="mg-b-10">Single Select with Search</p><select class="form-control select2">
+										<p class="mg-b-10">Single Select with Search</p>
+										<select class="form-control select2">
 											<option label="Choose one">
 											</option>
 											<option value="Firefox">

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Produit;
+use App\Models\Section;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProduitController extends Controller
 {
@@ -14,18 +16,20 @@ class ProduitController extends Controller
      */
     public function index()
     {
-        //
+        $produits = Produit::with([
+            'user' => function ($q) {
+                $q->select('id', 'name');
+            },
+            'section' => function ($q) {
+                $q->select('id', 'section_nom');
+            },
+        ])->orderBy('id', 'Desc')->get();
+
+        $sections = Section::orderBy('id', 'Desc')->select('id','section_nom')->get();
+        return view('produits.produits', \compact(['sections','produits']));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -35,30 +39,20 @@ class ProduitController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'produit_nom' => 'required',
+            'section_id' => 'required|exists:sections,id',
+        ]);
+        Produit::create([
+            'produit_nom' => $request->produit_nom,
+            'note' => $request->note,
+            'user_id' => Auth::user()->id,
+            'section_id' => $request->section_id,
+        ]);
+        return redirect()->route('produits.index')->with(['success' => 'Ajou avec seccess']);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Produit  $produit
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Produit $produit)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Produit  $produit
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Produit $produit)
-    {
-        //
-    }
+   
 
     /**
      * Update the specified resource in storage.
@@ -67,9 +61,24 @@ class ProduitController extends Controller
      * @param  \App\Models\Produit  $produit
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Produit $produit)
+    public function update(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'produit_nom' => 'required|unique:produits,produit_nom,'.$request->id,
+            'section_id' => 'required|exists:sections,id',
+            
+        ]);
+        $produit = Produit::find($request->id);
+        if ($produit) {
+            $produit->update([
+                'produit_nom' => $request->produit_nom,
+                'note' => $request->note,
+                'user_id' => Auth::user()->id,
+                'section_id' => $request->section_id,
+            ]);
+            return redirect()->route('produits.index')->with(['success' => 'Modif avec seccess']);
+        } else
+            return redirect()->route('produits.index')->with(['error' => 'erreur dans modif']);
     }
 
     /**
@@ -78,8 +87,9 @@ class ProduitController extends Controller
      * @param  \App\Models\Produit  $produit
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Produit $produit)
+    public function destroy(Request $request)
     {
-        //
+        $produit = Produit::find($request->id)->delete();
+        return redirect()->route('produits.index')->with(['success' => 'delete avec seccess']);
     }
 }

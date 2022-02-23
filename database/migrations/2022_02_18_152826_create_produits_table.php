@@ -19,7 +19,7 @@ class CreateProduitsTable extends Migration
             $table->text('note')->nullable();
 
             $table->bigInteger('section_id')->unsigned();
-            $table->foreign('section_id')->references('id')->on('sections')->cascadeOnDelete();
+            $table->foreign('section_id')->references('id')->on('sections')->onUpdate('cascade')->onDelete('cascade');
 
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
