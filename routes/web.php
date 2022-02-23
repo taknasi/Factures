@@ -28,6 +28,9 @@ Route::group(['middleware' => 'auth'], function () {
     /*************************************** Sections **************************************/
     Route::resource('produits', 'ProduitController', ['except' => ['edit', 'show', 'create']]);
     /*************************************** End Sections **********************************/
+    /*************************************** Sections **************************************/
+    Route::resource('factures', 'FactureController');
+    /*************************************** End Sections **********************************/
     Route::get('/test', function () {
         return view('factures.empty');
     });
