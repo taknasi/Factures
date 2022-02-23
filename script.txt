@@ -1,0 +1,92 @@
+/*********************************** fill select from another select ****************************************/
+
+/*********************************** First select 
+<div class="col">
+    <label for="inputName" class="control-label">Section</label>
+    <select name="Section" class="form-control SlectBox" onclick="console.log($(this).val())"
+        onchange="console.log('change is firing')">
+        <!--placeholder-->
+        <option value="" selected disabled>Sélectionnez la section</option>
+        @isset($sections)
+            @foreach ($sections as $section)
+                <option value="{{ $section->id }}">{{ $section->section_nom }} </option>
+            @endforeach
+        @endisset
+    </select>
+</div>
+
+/*********************************** Second select 
+
+<div class="col">
+    <label for="inputName" class="control-label">Produits</label>
+    <select id="product" name="product" class="form-control">
+    </select>
+</div>
+
+/*********************************** route
+
+Route::get('section/{id}','FactureController@getProduct')->name('section.getProducts'); 
+
+/*********************************** method
+
+public function getProduct($id){
+    $section=Section::find($id);
+    $produits="";
+    if($section){
+        $produits=Produit::where('section_id',$id)->pluck('produit_nom','id');
+    }
+    return json_encode($produits) ;
+}
+
+/*********************************** ajax 
+<script>
+    $(document).ready(function() {
+        $('select[name="Section"]').on('change', function() {
+            var SectionId = $(this).val();
+            if (SectionId) {
+                $.ajax({
+                    url: "{{ URL::to('section') }}/" + SectionId,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        $('select[name="product"]').empty();
+                        $.each(data, function(key, value) {
+                            $('select[name="product"]').append('<option value="' +
+                                key + '">' + value + '</option>');
+                        });
+                    },
+                });
+
+            } else {
+                console.log('AJAX load did not work');
+            }
+        });
+
+    });
+</script>
+
+/***************************************************** add file *************************************/
+
+if ($request->hasFile('pic')) {
+
+    $invoice_id = Invoices::latest()->first()->id;
+    $image = $request->file('pic');
+    $file_name = $image->getClientOriginalName();
+    $invoice_number = $request->invoice_number;
+
+    $attachments = new invoice_attachments();
+    $attachments->file_name = $file_name;
+    $attachments->invoice_number = $invoice_number;
+    $attachments->Created_by = Auth::user()->name;
+    $attachments->invoice_id = $invoice_id;
+    $attachments->save();
+
+    // move pic
+    $imageName = $request->pic->getClientOriginalName();
+    $request->pic->move(public_path('Attachments/' . $invoice_number), $imageName);
+}
+
+/******************************************** delete file or directory *********************************/
+
+Storage::disk('public_uploads')->deleteDirectory($Details->invoice_number);
+Storage::disk('public_uploads')->delete(file);

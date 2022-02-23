@@ -23,7 +23,7 @@ class ProduitController extends Controller
             'section' => function ($q) {
                 $q->select('id', 'section_nom');
             },
-        ])->orderBy('id', 'Desc')->get();
+        ])->orderBy('id', 'Desc')->withTrashed()->get();
 
         $sections = Section::orderBy('id', 'Desc')->select('id','section_nom')->get();
         return view('produits.produits', \compact(['sections','produits']));
@@ -89,7 +89,8 @@ class ProduitController extends Controller
      */
     public function destroy(Request $request)
     {
-        $produit = Produit::find($request->id)->delete();
+        // $produit = Produit::find($request->id)->delete();
+        $produit = Produit::find($request->id)->forceDelete();
         return redirect()->route('produits.index')->with(['success' => 'delete avec seccess']);
     }
 }
