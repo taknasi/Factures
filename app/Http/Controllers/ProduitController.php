@@ -25,8 +25,8 @@ class ProduitController extends Controller
             },
         ])->orderBy('id', 'Desc')->withTrashed()->get();
 
-        $sections = Section::orderBy('id', 'Desc')->select('id','section_nom')->get();
-        return view('produits.produits', \compact(['sections','produits']));
+        $sections = Section::orderBy('id', 'Desc')->select('id', 'section_nom')->get();
+        return view('produits.produits', \compact(['sections', 'produits']));
     }
 
 
@@ -52,7 +52,7 @@ class ProduitController extends Controller
         return redirect()->route('produits.index')->with(['success' => 'Ajou avec seccess']);
     }
 
-   
+
 
     /**
      * Update the specified resource in storage.
@@ -64,9 +64,9 @@ class ProduitController extends Controller
     public function update(Request $request)
     {
         $validated = $request->validate([
-            'produit_nom' => 'required|unique:produits,produit_nom,'.$request->id,
+            'produit_nom' => 'required|unique:produits,produit_nom,' . $request->id,
             'section_id' => 'required|exists:sections,id',
-            
+
         ]);
         $produit = Produit::find($request->id);
         if ($produit) {
@@ -89,8 +89,14 @@ class ProduitController extends Controller
      */
     public function destroy(Request $request)
     {
-        // $produit = Produit::find($request->id)->delete();
-        $produit = Produit::find($request->id)->forceDelete();
+        $produit = Produit::find($request->id)->delete();
+        // $produit = Produit::find($request->id)->forceDelete();
         return redirect()->route('produits.index')->with(['success' => 'delete avec seccess']);
+    }
+
+    public function resore($id)
+    {
+        Produit::withTrashed()->find($id)->restore();
+        return redirect()->route('produits.index')->with(['success' => 'restore avec seccess']);
     }
 }

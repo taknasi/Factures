@@ -90,3 +90,28 @@ if ($request->hasFile('pic')) {
 
 Storage::disk('public_uploads')->deleteDirectory($Details->invoice_number);
 Storage::disk('public_uploads')->delete(file);
+
+/******************************************** Print ***************************************************/
+
+<button class="btn btn-danger  float-left mt-3 mr-2" id="print_Button" onclick="printDiv()"> <i
+										class="mdi mdi-printer ml-1"></i>طباعة</button>
+
+<script type="text/javascript">
+	function printDiv() {
+		var printContents = document.getElementById('print').innerHTML; // had print how id ta3 saf7a kamla li bghit n imprimer
+		var originalContents = document.body.innerHTML;
+		document.body.innerHTML = printContents;
+		window.print();
+		document.body.innerHTML = originalContents;
+		location.reload();
+	}
+</script>
+
+/******************* code css for hide button طباعة
+<style>
+	@media print {
+		#print_Button {
+			display: none;
+		}
+	}
+</style>
