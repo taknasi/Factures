@@ -1,5 +1,13 @@
 @extends('layouts.master')
 @section('css')
+<style>
+	@media print {
+		#print_Button {
+			display: none;
+		}
+	}
+
+</style>
 @endsection
 @section('page-header')
 				<!-- breadcrumb -->
@@ -41,7 +49,7 @@
 				<!-- row -->
 				<div class="row row-sm">
 					<div class="col-md-12 col-xl-12">
-						<div class=" main-content-body-invoice">
+						<div class=" main-content-body-invoice" id="print">
 							<div class="card card-invoice">
 								<div class="card-body">
 									<div class="invoice-header">
@@ -142,9 +150,9 @@
 									<a class="btn btn-purple float-left mt-3 mr-2" href="">
 										<i class="mdi mdi-currency-usd ml-1"></i>Pay Now
 									</a>
-									<a href="#" class="btn btn-danger float-left mt-3 mr-2">
-										<i class="mdi mdi-printer ml-1"></i>Print
-									</a>
+									<button class="btn btn-danger  float-left mt-3 mr-2" id="print_Button" onclick="printDiv()"> <i
+										class="mdi mdi-printer ml-1"></i>طباعة</button>
+
 									<a href="#" class="btn btn-success float-left mt-3">
 										<i class="mdi mdi-telegram ml-1"></i>Send Invoice
 									</a>
@@ -162,4 +170,16 @@
 @section('js')
 <!--Internal  Chart.bundle js -->
 <script src="{{URL::asset('assets/plugins/chart.js/Chart.bundle.min.js')}}"></script>
+
+<script type="text/javascript">
+	function printDiv() {
+		var printContents = document.getElementById('print').innerHTML;
+		var originalContents = document.body.innerHTML;
+		document.body.innerHTML = printContents;
+		window.print();
+		document.body.innerHTML = originalContents;
+		location.reload();
+	}
+
+</script>
 @endsection

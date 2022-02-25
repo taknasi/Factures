@@ -12,6 +12,13 @@
     <link href="{{ URL::asset('assets/plugins/datatable/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
+    <!--Internal   Notify -->
+    <!--Internal  Font Awesome -->
+    <link href="{{ URL::asset('assets/plugins/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
+    <!--Internal   Notify -->
+    <link href="{{ URL::asset('assets/plugins/notify/css/notifIt.css') }}" rel="stylesheet" />
+    <!--Internal  treeview -->
+    <link href="{{ URL::asset('assets/plugins/treeview/treeview.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('page-header')
     <!-- breadcrumb -->
@@ -214,6 +221,20 @@
     <!-- main-content closed -->
 @endsection
 @section('js')
+    <script src="{{ URL::asset('assets/plugins/treeview/treeview.js') }}"></script>
+    <!--Internal  Notify js -->
+    <script src="{{ URL::asset('assets/plugins/notify/js/notifIt.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/notify/js/notifit-custom.js') }}"></script>
+    <script>
+        function noo() {
+            notif({
+                msg: "<b>Success:</b> Well done Details Submitted Successfully",
+                type: "success"
+            });
+        }
+        window.onload = noo();
+    </script>
+
     <!-- mli ikoun error f validation walakin edit w7alna fiha tanchofo chi 7al -->
     @if (Session::has('errors'))
         <script>
@@ -241,7 +262,7 @@
     </script>
 
     <!-- hna fin kan3amro l values ta3 delete -->
-    
+
     <script>
         $('#modaldemo9').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
@@ -273,4 +294,9 @@
     <script src="{{ URL::asset('assets/js/table-data.js') }}"></script>
 
     <script src="{{ URL::asset('assets/js/modal.js') }}"></script>
+
+    <!--Internal  Notify js -->
+
+    <script src="{{ URL::asset('assets/plugins/notify/js/notifIt.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/notify/js/notifit-custom.js') }}"></script>
 @endsection

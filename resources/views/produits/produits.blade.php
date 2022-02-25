@@ -81,6 +81,13 @@
                                                     data-produit_nom="{{ $produit->produit_nom }}" data-toggle="modal"
                                                     href="#modaldemo9" title="حذف"><i class="las la-trash"></i></a>
 
+                                                <form action="{{ route('restore', $produit->id ) }}" method="POST">
+                                                    @csrf
+                                                    <button type="submit"
+                                                    class=" btn btn-sm btn-secondary" 
+                                                    title="حذف"><i class="las la-trash-restore"></i></button>
+                                                </form>
+
                                             </td>
                                         </tr>
                                     @endforeach
@@ -122,7 +129,7 @@
                                 <label lass="my-1 mr-2" for="inlineFormCustomSelectPref">Section : </label>
                                 <select id="myselect" name="section_id"
                                     class=" form-control @error('section_id') is-invalid @enderror"">
-                                        <option label=" -- Choisissez-en un --" selected disabled>
+                                            <option label=" -- Choisissez-en un --" selected disabled>
                                     </option>
                                     @foreach ($sections as $section)
                                         <option value="{{ $section->id }}">
@@ -188,7 +195,7 @@
                                 <label lass="my-1 mr-2" for="inlineFormCustomSelectPref">Section : </label>
                                 <select id="myselect" name="section_id"
                                     class=" form-control @error('section_id') is-invalid @enderror"">
-                                        <option label=" -- Choisissez-en un --" selected disabled>
+                                            <option label=" -- Choisissez-en un --" selected disabled>
                                     </option>
                                     @foreach ($sections as $section)
                                         <option value="{{ $section->id }}">
@@ -219,6 +226,9 @@
                 </div>
             </div>
         </div>
+
+
+
         <!-- End Modal edit -->
 
         <!-- delete -->
@@ -246,6 +256,8 @@
                 </form>
             </div>
         </div>
+
+
     </div>
     <!-- row closed -->
     </div>

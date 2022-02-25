@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SectionRequest;
 use App\Models\Section;
+use App\Notifications\AddInvoice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 
 class SectionController extends Controller
 {
@@ -35,6 +37,8 @@ class SectionController extends Controller
             'description' => $request->description,
             'user_id' => Auth::user()->id
         ]);
+        $user=Auth::user();
+        Notification::send($user,new AddInvoice());
 
         return redirect()->route('sections.index')->with(['success' => 'Ajou avec seccess']);
     }
