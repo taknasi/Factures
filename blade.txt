@@ -7,4 +7,4 @@ onclick="event.preventDefault();document.getElementById('logout-form').submit();
     @csrf
 </form>
 
-/******************************************* Modal sir l section blad ********************************************************/
+/******************************************* Modal sir l section blad *********************************************************/
